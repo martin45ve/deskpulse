@@ -99,9 +99,7 @@
 
   <section id="install">
     <h2 data-t="installH">Install in 4 clicks</h2>
-    <!-- Install video: added back when the new DeskPulse Sensors recording is ready.
-    <video class="demo" src="install.mp4" poster="install-poster.jpg" autoplay muted loop playsinline controls preload="metadata"></video>
-    -->
+    <video id="demo" class="demo" src="install-en.mp4" poster="install-poster-en.jpg" autoplay muted loop playsinline controls preload="metadata"></video>
     <p class="lead" data-t="installLead">Choose your browser to see where the download appears.</p>
     <div class="tabs" role="tablist">
       <button data-b="safari">Safari</button>
@@ -209,6 +207,10 @@
     const dict = lang === "es" ? ES : EN;
     document.querySelectorAll("[data-t]").forEach(el => { if (dict[el.dataset.t]) el.innerHTML = dict[el.dataset.t]; });
     document.documentElement.lang = lang;
+    const v = document.getElementById("demo");
+    if (v && !v.src.endsWith("install-" + lang + ".mp4")) {
+      v.poster = "install-poster-" + lang + ".jpg"; v.src = "install-" + lang + ".mp4"; v.play().catch(() => {});
+    }
     document.getElementById("lang").textContent = lang === "es" ? "English" : "Español";
     try { localStorage.setItem("lang", lang); } catch (e) {}
   }
